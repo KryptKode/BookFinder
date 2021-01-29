@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/book_item_padding">
+
+    <ImageView
+        android:id="@+id/book_cover_image"
+        android:layout_width="@dimen/book_cover_image_max_width"
+        android:layout_height="0dp"
+        android:contentDescription="@string/book_cover_image_content_desc"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/book_cover_image_max_width"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/book_item_margin"
+        android:layout_marginEnd="@dimen/book_item_margin"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/book_cover_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/authors_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/book_item_margin"
+        android:layout_marginEnd="@dimen/book_item_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/book_cover_image"
+        app:layout_constraintTop_toBottomOf="@id/title_text_view"
+        tools:text="Cum liberi peregrinationes, Nunquam fallere usus.Lotus, teres armariums semper magicae de talis, altus impositio.Persuadere patienter ducunt ad lotus detrius." />
+
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/rating_bar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/book_item_margin"
+        android:layout_marginTop="@dimen/book_item_margin"
+        android:layout_marginEnd="@dimen/book_item_margin"
+        android:isIndicator="true"
+        android:numStars="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/book_cover_image"
+        app:layout_constraintTop_toBottomOf="@id/authors_text_view"
+        tools:rating="4" />
+
+    <TextView
+        android:id="@+id/rating_count_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/book_item_margin"
+        android:layout_marginEnd="@dimen/book_item_margin"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+        app:layout_constraintStart_toEndOf="@id/rating_bar"
+        app:layout_constraintTop_toTopOf="@id/rating_bar"
+        tools:text="(40+)" />
+
+    <TextView
+        android:id="@+id/page_count_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/book_item_margin"
+        android:layout_marginTop="@dimen/book_item_margin"
+        android:layout_marginEnd="@dimen/book_item_margin"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rating_count_text_view"
+        app:layout_constraintTop_toBottomOf="@id/authors_text_view"
+        tools:text="100 Pages" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
