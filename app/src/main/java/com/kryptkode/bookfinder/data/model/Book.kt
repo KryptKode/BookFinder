@@ -7,5 +7,6 @@ data class Book(
     val datePublished: String,
     val pages: String,
     val rating: Float,
-    val ratingCount: String
+    val ratingCount: String,
+    val imageUrl:String
 )

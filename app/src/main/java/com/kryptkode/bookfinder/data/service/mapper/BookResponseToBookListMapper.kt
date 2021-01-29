@@ -4,7 +4,9 @@ import com.kryptkode.bookfinder.data.model.Book
 import com.kryptkode.bookfinder.data.service.response.BookResponse
 import java.util.Locale
 
-class BookResponseToBookListMapper {
+class BookResponseToBookListMapper(
+    private val convertUrlToHttps: ConvertUrlToHttps
+) {
     fun mapToBookList(bookResponse: BookResponse): List<Book> {
         return bookResponse.items.map {
             Book(
@@ -15,8 +17,9 @@ class BookResponseToBookListMapper {
                 } ?: "Anonymous",
                 it.volumeInfo.publishedDate ?: "Unknown",
                 it.volumeInfo.pageCount.toString(),
-                it.volumeInfo.rating.toFloat(),
-                it.volumeInfo.ratingCount.toString()
+                it.volumeInfo.rating,
+                it.volumeInfo.ratingCount.toString(),
+                convertUrlToHttps.convert(it.volumeInfo.imageLinks?.thumbnail ?: "")
             )
         }
     }

@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kryptkode.bookfinder.R
 import com.kryptkode.bookfinder.data.model.Book
 import com.kryptkode.bookfinder.databinding.ItemBookBinding
+import com.kryptkode.bookfinder.util.imageloader.ImageLoader
 
-class BookListAdapter : ListAdapter<Book, BookListAdapter.BookListViewHolder>(DIFF_UTIL) {
+class BookListAdapter(
+    private val imageLoader: ImageLoader
+) : ListAdapter<Book, BookListAdapter.BookListViewHolder>(DIFF_UTIL) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookListViewHolder {
         return BookListViewHolder(
@@ -34,6 +37,8 @@ class BookListAdapter : ListAdapter<Book, BookListAdapter.BookListViewHolder>(DI
             binding.pageCountTextView.text = getString(R.string.book_pages_text, book.pages)
             binding.ratingCountTextView.text =
                 getString(R.string.book_rating_count_text, book.ratingCount)
+
+            imageLoader.load(book.imageUrl, binding.bookCoverImage)
         }
 
         private fun getString(resId: Int, vararg args: Any): String {

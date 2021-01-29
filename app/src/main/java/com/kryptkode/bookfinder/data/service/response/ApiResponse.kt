@@ -20,6 +20,13 @@ data class BookVolumeInfo(
     @get:Json(name = "authors") val authors: List<String>?,
     @get:Json(name = "publishedDate") val publishedDate: String?,
     @get:Json(name = "pageCount") val pageCount: Int = 0,
-    @get:Json(name = "averageRating") val rating: Int = 0,
+    @get:Json(name = "averageRating") val rating: Float = 0f,
     @get:Json(name = "ratingsCount") val ratingCount: Int = 0,
+    @get:Json(name = "imageLinks") val imageLinks: ImageLinks? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class ImageLinks(
+    @get:Json(name = "smallThumbnail") val smallThumbnail: String = "",
+    @get:Json(name = "thumbnail") val thumbnail: String = "",
 )

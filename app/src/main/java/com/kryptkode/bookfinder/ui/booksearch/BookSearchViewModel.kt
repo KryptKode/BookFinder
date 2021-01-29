@@ -8,6 +8,7 @@ import com.kryptkode.bookfinder.data.model.Book
 import com.kryptkode.bookfinder.data.model.DataState
 import com.kryptkode.bookfinder.data.service.ServiceFactory
 import com.kryptkode.bookfinder.data.service.mapper.BookResponseToBookListMapper
+import com.kryptkode.bookfinder.data.service.mapper.ConvertUrlToHttps
 import com.kryptkode.bookfinder.data.usecase.SearchBookUseCase
 import com.kryptkode.bookfinder.util.extension.asLiveData
 import kotlinx.coroutines.flow.Flow
@@ -56,7 +57,11 @@ class BookSearchViewModel(
         val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 val apiService = ServiceFactory.createBookService()
-                val useCase = SearchBookUseCase(apiService, BookResponseToBookListMapper())
+                val useCase = SearchBookUseCase(
+                    apiService, BookResponseToBookListMapper(
+                        ConvertUrlToHttps()
+                    )
+                )
                 return BookSearchViewModel(useCase) as T
             }
         }
