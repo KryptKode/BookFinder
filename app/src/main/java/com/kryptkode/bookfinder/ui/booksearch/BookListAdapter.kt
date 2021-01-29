@@ -30,7 +30,6 @@ class BookListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: Book) {
-            //TODO: Load image
             binding.titleTextView.text = book.title
             binding.authorsTextView.text = book.author
             binding.ratingBar.rating = book.rating

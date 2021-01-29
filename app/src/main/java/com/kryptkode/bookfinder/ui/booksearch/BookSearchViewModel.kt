@@ -29,9 +29,10 @@ class BookSearchViewModel(
             is DataState.Error -> oldState.copy(
                 loading = false,
                 error = true,
-                errorMessage = dataState.message
+                errorMessage = dataState.message,
+                books = emptyList()
             )
-            is DataState.Loading -> oldState.copy(loading = true, error = false)
+            is DataState.Loading -> oldState.copy(loading = true)
             is DataState.Success -> oldState.copy(
                 loading = false,
                 error = false,

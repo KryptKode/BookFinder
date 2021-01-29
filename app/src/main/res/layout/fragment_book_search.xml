@@ -59,6 +59,58 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+
+    <ImageView
+        android:id="@+id/error_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/error_img_cd"
+        app:layout_constraintBottom_toTopOf="@id/error_text_view"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/search_input"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/ic_book" />
+
+    <TextView
+        android:id="@+id/error_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/book_item_margin"
+        android:layout_marginBottom="@dimen/book_item_margin"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintBottom_toTopOf="@id/retry_button"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/error_image"
+        app:layout_constraintWidth_max="256dp"
+        tools:text="An error occurred. Please retry" />
+
+
+    <Button
+        android:id="@+id/retry_button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/book_item_margin"
+        android:text="@string/retry_btn_text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/error_text_view" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/error_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="error_image,error_text_view" />
+
+
     <include layout="@layout/guidelines" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

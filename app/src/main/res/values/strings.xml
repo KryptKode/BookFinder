@@ -4,4 +4,7 @@
     <string name="book_search_hint">Enter a book name</string>
     <string name="book_pages_text">%s pages</string>
     <string name="book_rating_count_text">(%s)</string>
+    <string name="retry_btn_text">Retry</string>
+    <string name="error_img_cd">Cloud icon</string>
+    <string name="book_search_hint_message">Enter a book name ☝️ to begin search</string>
 </resources>
