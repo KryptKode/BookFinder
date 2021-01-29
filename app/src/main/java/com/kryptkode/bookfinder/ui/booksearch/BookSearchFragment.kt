@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kryptkode.bookfinder.R
 import com.kryptkode.bookfinder.databinding.FragmentBookSearchBinding
+import com.kryptkode.bookfinder.util.flowbinding.lifecycleAwareLaunch
 import com.kryptkode.bookfinder.util.flowbinding.textChanges
 import com.kryptkode.bookfinder.util.imageloader.ImageLoader
 import com.kryptkode.bookfinder.util.viewbinding.viewBinding
+import kotlinx.coroutines.flow.onEach
 
 class BookSearchFragment : Fragment(R.layout.fragment_book_search) {
 
@@ -31,7 +33,8 @@ class BookSearchFragment : Fragment(R.layout.fragment_book_search) {
         binding.swipeRefresh.isEnabled = false
         binding.swipeRefresh.isRefreshing = false
         binding.recyclerView.adapter = adapter
-        viewModel.findBook(binding.addressEditText.textChanges)
+        binding.searchEditText.textChanges.onEach(viewModel::findBook)
+            .lifecycleAwareLaunch(viewLifecycleOwner)
     }
 
     private fun setupObservers() {

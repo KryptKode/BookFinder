@@ -13,6 +13,30 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
+/**
+ * This class extends [ReadOnlyProperty] and serves as a delegate helper
+ * for binding viewBinding generated classes in [Fragment] subclasses
+ *
+ * Below is a sample usage with a layout resource file named `sample_fragment`
+ * and the generated binding class of `SampleFragmentBinding`.
+ *
+ * ```
+ * class SampleFragment: Fragment(R.layout.sample_fragment) {
+ *
+ * private val binding by viewBinding(SampleFragmentBinding::bind)
+ *
+ * override fun onViewCreated(view: View, bundle: Bundle?) {
+ *      super.onViewCreated(view, bundle)
+ *
+ *      binding.sampleButton.setOnClickListener {
+ *          showToast("Hello view binding!")
+ *      }
+ *   }
+ *
+ * }
+ * ```
+ * [Source](http://bit.ly/3iz9VKO)
+ * */
 abstract class ViewBindingProperty<in R : Fragment, T : ViewBinding>(
     private val viewBinder: (View) -> T
 ) : ReadOnlyProperty<R, T> {

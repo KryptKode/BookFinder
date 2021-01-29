@@ -11,18 +11,22 @@ import com.kryptkode.bookfinder.data.service.mapper.BookResponseToBookListMapper
 import com.kryptkode.bookfinder.data.service.mapper.ConvertUrlToHttps
 import com.kryptkode.bookfinder.data.usecase.SearchBookUseCase
 import com.kryptkode.bookfinder.util.extension.asLiveData
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.scan
 
+@Suppress("EXPERIMENTAL_API_USAGE")
 class BookSearchViewModel(
     private val bookUseCase: SearchBookUseCase
 ) : ViewModel() {
 
     private val mutableViewState = MutableLiveData<BookSearchViewState>()
     val viewState = mutableViewState.asLiveData()
+
+    private val searchQuery = MutableSharedFlow<String>()
 
     private val stateReducer = { oldState: BookSearchViewState, dataState: DataState<List<Book>> ->
         when (dataState) {
@@ -41,9 +45,9 @@ class BookSearchViewModel(
         }
     }
 
-    @Suppress("EXPERIMENTAL_API_USAGE")
-    fun findBook(query: Flow<String>) {
-        query
+    init {
+        searchQuery
+            .distinctUntilChanged()
             .flatMapLatest(bookUseCase::execute)
             .scan(BookSearchViewState()) { previous, result ->
                 stateReducer(previous, result)
@@ -51,6 +55,10 @@ class BookSearchViewModel(
                 mutableViewState.postValue(it)
             }
             .launchIn(viewModelScope)
+    }
+
+    suspend fun findBook(query: String) {
+        searchQuery.emit(query)
     }
 
     companion object {
