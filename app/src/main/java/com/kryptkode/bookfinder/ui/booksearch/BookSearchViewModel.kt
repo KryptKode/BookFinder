@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.kryptkode.bookfinder.data.dispatcher.AppDispatchersImpl
 import com.kryptkode.bookfinder.data.model.Book
 import com.kryptkode.bookfinder.data.model.DataState
 import com.kryptkode.bookfinder.data.service.ServiceFactory
@@ -66,11 +67,9 @@ class BookSearchViewModel(
         val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 val apiService = ServiceFactory.createBookService()
-                val useCase = SearchBookUseCase(
-                    apiService, BookResponseToBookListMapper(
-                        ConvertUrlToHttps()
-                    )
-                )
+                val mapper = BookResponseToBookListMapper(ConvertUrlToHttps())
+                val dispatchers = AppDispatchersImpl()
+                val useCase = SearchBookUseCase(apiService, mapper, dispatchers)
                 return BookSearchViewModel(useCase) as T
             }
         }
