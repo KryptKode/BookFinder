@@ -1,7 +1,8 @@
-package com.kryptkode.bookfinder
+package com.kryptkode.bookfinder.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.kryptkode.bookfinder.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
