@@ -2,7 +2,7 @@ package com.kryptkode.bookfinder.data.service.mapper
 
 import com.kryptkode.bookfinder.data.model.Book
 import com.kryptkode.bookfinder.data.service.response.BookResponse
-import java.util.*
+import java.util.Locale
 
 class BookResponseToBookListMapper {
     fun mapToBookList(bookResponse: BookResponse): List<Book> {
@@ -10,11 +10,13 @@ class BookResponseToBookListMapper {
             Book(
                 it.id,
                 it.volumeInfo.title,
-                it.volumeInfo.authors.joinToString { author -> author.capitalize(Locale.getDefault()) },
-                it.volumeInfo.publishedDate,
-                it.volumeInfo.pageCount,
-                it.volumeInfo.rating,
-                it.volumeInfo.ratingCount
+                it.volumeInfo.authors?.joinToString { author ->
+                    author.capitalize(Locale.getDefault())
+                } ?: "Anonymous",
+                it.volumeInfo.publishedDate ?: "Unknown",
+                it.volumeInfo.pageCount.toString(),
+                it.volumeInfo.rating.toFloat(),
+                it.volumeInfo.ratingCount.toString()
             )
         }
     }

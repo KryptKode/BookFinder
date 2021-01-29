@@ -1,6 +1,6 @@
 package com.kryptkode.bookfinder.data.service
 
-import androidx.viewbinding.BuildConfig
+import com.kryptkode.bookfinder.BuildConfig
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

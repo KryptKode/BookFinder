@@ -10,7 +10,8 @@ import com.kryptkode.bookfinder.data.service.ServiceFactory
 import com.kryptkode.bookfinder.data.service.mapper.BookResponseToBookListMapper
 import com.kryptkode.bookfinder.data.usecase.SearchBookUseCase
 import com.kryptkode.bookfinder.util.extension.asLiveData
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.scan
@@ -38,9 +39,10 @@ class BookSearchViewModel(
         }
     }
 
-    @ExperimentalCoroutinesApi
-    fun findBook(query: String) {
-        bookUseCase.execute(query)
+    @Suppress("EXPERIMENTAL_API_USAGE")
+    fun findBook(query: Flow<String>) {
+        query
+            .flatMapLatest(bookUseCase::execute)
             .scan(BookSearchViewState()) { previous, result ->
                 stateReducer(previous, result)
             }.onEach {
@@ -50,6 +52,7 @@ class BookSearchViewModel(
     }
 
     companion object {
+        @Suppress("UNCHECKED_CAST")
         val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 val apiService = ServiceFactory.createBookService()

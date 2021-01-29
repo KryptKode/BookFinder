@@ -2,4 +2,6 @@
     <string name="app_name">BookFinder</string>
     <string name="book_cover_image_content_desc">Book cover image</string>
     <string name="book_search_hint">Enter a book name</string>
+    <string name="book_pages_text">%s pages</string>
+    <string name="book_rating_count_text">(%s)</string>
 </resources>

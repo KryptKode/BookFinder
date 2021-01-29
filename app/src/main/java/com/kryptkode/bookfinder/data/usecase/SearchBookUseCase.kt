@@ -13,12 +13,17 @@ class SearchBookUseCase(
 ) {
 
     fun execute(query: String): Flow<DataState<List<Book>>> = flow {
-        emit(DataState.Loading)
-        try {
-            val result = bookService.searchBooks(query)
-            emit(DataState.Success(mapper.mapToBookList(result)))
-        } catch (e: Exception) {
-            emit(DataState.Error(e.localizedMessage ?: "An error occurred"))
+        if (query.isEmpty()) {
+            emit(DataState.Success(emptyList<Book>()))
+        } else {
+            emit(DataState.Loading)
+            try {
+                val result = bookService.searchBooks(query)
+                emit(DataState.Success(mapper.mapToBookList(result)))
+            } catch (e: Exception) {
+                emit(DataState.Error(e.localizedMessage ?: "An error occurred"))
+            }
+
         }
     }
 }

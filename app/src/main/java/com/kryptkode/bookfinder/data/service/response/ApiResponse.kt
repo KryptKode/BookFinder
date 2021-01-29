@@ -14,11 +14,12 @@ data class BookItem(
     @get:Json(name = "volumeInfo") val volumeInfo: BookVolumeInfo,
 )
 
+@JsonClass(generateAdapter = true)
 data class BookVolumeInfo(
     @get:Json(name = "title") val title: String,
-    @get:Json(name = "authors") val authors: List<String>,
-    @get:Json(name = "publishedDate") val publishedDate: String,
-    @get:Json(name = "pageCount") val pageCount: Int,
-    @get:Json(name = "averageRating") val rating: Int,
-    @get:Json(name = "ratingsCount") val ratingCount: Int,
+    @get:Json(name = "authors") val authors: List<String>?,
+    @get:Json(name = "publishedDate") val publishedDate: String?,
+    @get:Json(name = "pageCount") val pageCount: Int = 0,
+    @get:Json(name = "averageRating") val rating: Int = 0,
+    @get:Json(name = "ratingsCount") val ratingCount: Int = 0,
 )
