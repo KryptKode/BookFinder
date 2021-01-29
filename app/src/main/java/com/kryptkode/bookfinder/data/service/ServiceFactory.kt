@@ -1,5 +1,6 @@
 package com.kryptkode.bookfinder.data.service
 
+import androidx.viewbinding.BuildConfig
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,7 +13,11 @@ object ServiceFactory {
     private const val MAX_TIMEOUT_SECS = 60L
     private const val BASE_URL = "https://www.googleapis.com/"
 
-    fun makeBooksService(moshi: Moshi, isDebug: Boolean): BookService {
+    fun createBookService(): BookService {
+        return makeBooksService(Moshi.Builder().build(), BuildConfig.DEBUG)
+    }
+
+    private fun makeBooksService(moshi: Moshi, isDebug: Boolean): BookService {
         val okHttpClient = makeOkHttpClient(
             makeLoggingInterceptor((isDebug))
         )
