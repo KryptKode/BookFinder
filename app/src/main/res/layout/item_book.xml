@@ -25,6 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/book_item_margin"
         android:layout_marginEnd="@dimen/book_item_margin"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/book_cover_image"
