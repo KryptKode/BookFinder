@@ -57,3 +57,4 @@ The presentation layer is implemented with `MVVM` using `ViewModel` and `LiveDat
     - Add retry functionality
     - Add detail screen
     - UI responsiveness
+    - List pagination
